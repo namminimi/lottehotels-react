@@ -1,0 +1,36 @@
+.special {
+    background: #eee;
+    padding: 60px 0;
+}
+.special h2 {
+    font-size: 24px;
+    font-weight: normal;
+    padding-bottom: 40px;
+}
+.special h2 span {
+    font-size: 38px;
+}
+.special ul {
+    display: flex;
+    justify-content: space-between;
+}
+.special ul li {
+    width: 30%;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px 5px rgba(0,0,0,0.2);
+}
+.special ul li img {
+    width: 100%;
+}
+.special ul li .textdiv {
+    padding: 20px;
+    text-align: center;
+}
+.special h3 {
+    padding-bottom: 20px;
+    font-size: 18px;
+    font-weight: normal;
+}
+.special ul li p {
+    padding-bottom: 16px;
+}
