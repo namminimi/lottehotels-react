@@ -34,3 +34,34 @@
 .special ul li p {
     padding-bottom: 16px;
 }
+
+.specialpage ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.specialpage ul li {
+    width: 49%;
+    border: 1px solid #ddd;
+    margin-bottom: 30px;
+}
+.specialpage ul li img {
+    width: 100%;
+}
+.specialpage ul li .textdiv {
+    padding: 20px 20px 10px;
+    line-height: 36px;
+}
+
+.specialpage ul li h3 {
+    font-size: 18px;
+}
+
+.specialpage ul li p {
+    padding-bottom: 30px;
+}
+
+.specialpage ul li .textdiv div {
+    border-top: 1px solid #eee;
+}
