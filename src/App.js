@@ -6,6 +6,7 @@ import SpDetailContainer from './container/SpDetailContainer';
 import SpecialContainer from './container/SpecialContainer';
 import Main from './pages/Main';
 import JoinPage from './pages/member/JoinPage';
+import Login from './pages/member/Login';
 
 
 
@@ -20,6 +21,7 @@ function App() {
       element={<SpecialContainer isMain={false}/>}/>
       <Route path="/special/:no" element={<SpDetailContainer/>}/>
       <Route path='/join' element={<JoinPage/>}/>
+      <Route path='/login' element={<Login/>}/>
      </Routes>
      <Footer/>
     </div>

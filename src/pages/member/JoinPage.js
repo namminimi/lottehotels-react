@@ -68,7 +68,7 @@ const JoinPage = () => {
             <Title title="Join"/>
             <div>
                 <form onSubmit={onSubmit}>
-                    <table>
+                    <table className='defaulttable'>
                         <tr>
                             <td>이름</td>
                             <td><input type="text" name="m_name" value={formData.m_name} onChange={onChange}/></td>
