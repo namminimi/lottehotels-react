@@ -5,7 +5,7 @@ import { API_URL } from '../../config/apiurl';
 import { setCookie } from '../../util/cookie';
 import { useDispatch } from 'react-redux';
 import { goToHome, setLogin } from '../../moduls/loginCheck';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -54,21 +54,28 @@ const Login = () => {
         <div className='inner' id='login'>
             <Title title="Login"/>
             <form onSubmit={onSubmit}>
-                <table>
-                    <tr>
-                        <td>아이디(이메일주소)</td>
-                        <td><input type="text" name='useremail' value={loginData.useremail} onChange={onChange}/></td>
-                    </tr>
-                    <tr>
-                        <td>비밀번호</td>
-                        <td><input type="password" name='userpass' value={loginData.userpass} onChange={onChange}/></td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}>
-                            <button type="submit">로그인</button>
-                            <button>회원가입</button>
-                        </td>
-                    </tr>
+                <table className='defaulttable small'>
+                    <tbody>
+                        <tr>
+                            <td>아이디(이메일주소)</td>
+                            <td><input type="text" name='useremail' value={loginData.useremail} onChange={onChange}/></td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호</td>
+                            <td><input type="password" name='userpass' value={loginData.userpass} onChange={onChange}/></td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2}>
+                                <button type="submit">로그인</button>
+                                <button>회원가입</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2}>
+                                <Link to="/findid"><span>아이디 찾기</span></Link> <Link to="/findpass"><span>비밀번호 찾기</span></Link>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </form>
         </div>
