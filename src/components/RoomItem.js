@@ -3,6 +3,7 @@ import { API_URL } from '../config/apiurl';
 import './RoomItem.css';
 
 const RoomItem = ({item}) => {
+    const price = Number(item.r_price).toLocaleString('ko-kR')
     return (
         <li>
             <div className='roomitem'>
@@ -13,7 +14,8 @@ const RoomItem = ({item}) => {
                 <p>기준인원: 2 <br/> 최대인원: 3</p>
             </div>
             <div>
-                <div className='price'>{item.r_price}<br/><span>원1박</span></div>
+                <div className='price'>
+                    {price}<br/><span>원1박</span></div>
                 <div>
                     <button>객실 상세보기</button>
                     <button>예약하기</button>
