@@ -28,7 +28,7 @@ table {
 table td {
   padding: 10px;
 }
-input {
+input[type='text'] {
   width: 100%;
   line-height: 32px;
   border: none;

@@ -9,7 +9,7 @@ const Main = () => {
     return (
         <div>
             <VisualSlider/>
-            <SpecialContainer isMain={true}/>
+            <SpecialContainer isMain={true} limits={5}/>
             <Promotion/>
         </div>
     );

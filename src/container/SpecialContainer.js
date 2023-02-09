@@ -1,14 +1,20 @@
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { API_URL } from '../config/apiurl';
 import { getDatas } from '../moduls/special';
 import SpecialOffer from '../pages/SpecialOffer';
 import SpecialOfferPage from '../pages/SpecialOfferPage';
 
-const SpecialContainer = ({isMain}) => {
+const SpecialContainer = ({isMain, limits}) => {
+    const specialData = async () =>{
+        const data = await axios.get(`${API_URL}/specials/${limits}`);
+        return data;
+    }
     const {loading, data, error} = useSelector(state=>state.special.specials)
     const dispatch = useDispatch();
     useEffect(()=>{
-        dispatch(getDatas())
+        dispatch(getDatas(specialData))
     },[dispatch])
     if(loading) return <div>로딩중....</div>
     if(error) return <div>에러가 발생했습니다</div>

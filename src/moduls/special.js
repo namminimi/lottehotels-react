@@ -27,12 +27,12 @@ const initialState = {
 }
 //redux middlewear thunk함수 생성
 //thunk함수를 사용해서 액션 객체를 디스패치하기
-export const getDatas=() => async dispatch => {
+export const getDatas=(callback) => async dispatch => {
     dispatch({ type: GET_DATAS }) //요청시작
     //에러핸들링
     try{
         //API_URL = http://localhost:8080
-        const response = await axios.get(`${API_URL}/special`);
+        const response = await callback();
         const data = response.data;
         dispatch({ type: GET_DATAS_SUCCESS , data: data })
     }
