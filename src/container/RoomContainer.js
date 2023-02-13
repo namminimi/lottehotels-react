@@ -10,7 +10,7 @@ const roomData = async () => {
     const data = await axios.get(`${API_URL}/room`);
     return data;
 }
-const RoomContainer = () => {
+const RoomContainer = ({isreserve}) => {
     const {loading, data, error} = useSelector(state=>state.special.specials);
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -20,9 +20,7 @@ const RoomContainer = () => {
     if(error) return <div>오류발생했습니다</div>
     if(!data) return <div>데이터가 없습니다</div>
     return (
-        <div>
-            <RoomPage data={data}/>
-        </div>
+         <RoomPage data={data} isreserve={isreserve}/>
     );
 };
 

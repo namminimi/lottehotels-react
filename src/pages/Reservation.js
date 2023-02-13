@@ -2,32 +2,58 @@ import React, { useState } from 'react';
 import Title from '../components/Title';
 import "./Reservation.css"
 import Example from './Example';
+import { useDispatch, useSelector } from 'react-redux';
+import { dataUpdate } from '../moduls/reserve';
+import RoomContainer from '../container/RoomContainer';
+import axios from 'axios';
+import { API_URL } from '../config/apiurl';
 
 
 const Reservation = () => {
     const [isShow, setIsShow] = useState(false);
-    const [reservData, setReservData] = useState({
-        rv_checkin: "",
-        rv_checkout: "",
-        rv_adult: "",
-        rv_child: ""
-    })
-    const hideDateDiv =(start, end) => {
-        setIsShow(false)
-        setReservData({
-            ...reservData,
-            rv_checkin: start,
-            rv_checkout: end
-        })
+    //체크인, 체크아웃 스토어에서 받아오기
+    const rv_date = useSelector(state => state.reserve.rv_date);
+    const dispatch = useDispatch();
+    
+    const hideDateDiv = (start, end) => {
+        if(start && end) {
+            dispatch(dataUpdate({
+                name: "rv_date",
+                value: {
+                    checkin: start,
+                    checkout: end
+                }
+            }))
+            console.log(start, end);
+            setIsShow(false);
+        }else {
+            console.log("데이터가 없음")
+            return;
+        }
+        
+        
     }
     const onChange = (e) => {
         const {name, value} = e.target;
-        setReservData({
-            ...reservData,
-            [name]: value
-        })
-        console.log(reservData)
+        dispatch(dataUpdate({
+            name:name,
+            value:value
+        }))
+        
+       
     }
+    //해당 날짜에 예약이 되어있는 객실번호 불러오기
+    const searchRoom = (start, end) => {
+        axios.get(`${API_URL}/searchRoom?start=${start}&end=${end}`)
+        .then(res=>{
+            console.log(res.data)
+        })
+        .catch(e=>{
+            console.log(e)
+        })
+    }
+
+
     return (
         <div className='inner'>
             <Title title="Reservation"/>
@@ -36,12 +62,15 @@ const Reservation = () => {
                     <li>
                         <div>
                             <span>Check in</span>
-                            <input name='rv_checkin' onChange={onChange} 
-                            onClick={()=>setIsShow(!isShow)}/>
+                            <input name='rv_checkin' 
+                            onClick={()=>setIsShow(!isShow)}
+                            value={rv_date.checkin}/>
                         </div>
                         <div>
                             <span>Check out</span>
-                            <input name='rv_checkout' onChange={onChange}/>
+                            <input name='rv_checkout' 
+                            onClick={()=>setIsShow(!isShow)}
+                            value={rv_date.checkout}/>
                         </div>
                         <div className='checkdate'>
                             {isShow && <Example hideDateDiv={hideDateDiv}/>}
@@ -69,12 +98,16 @@ const Reservation = () => {
                             </select>
                         </div>
                     </li>
-                    <li>
-                        <div>검색</div>
+                    <li onClick={()=>searchRoom(rv_date.checkin,
+                         rv_date.checkout)}>
+                        <div>
+                            검색
+                        </div>
                     </li>
 
                 </ul>
             </div>
+            <RoomContainer isreserve={true}/>
         </div>
     );
 };
