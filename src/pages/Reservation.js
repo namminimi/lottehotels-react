@@ -14,7 +14,8 @@ const Reservation = () => {
     //체크인, 체크아웃 스토어에서 받아오기
     const rv_date = useSelector(state => state.reserve.rv_date);
     const dispatch = useDispatch();
-    
+    //예약이 불가능한 방목록 ===> 이미 그 날짜에 예약이 된 객실번호 배열
+    const [reserveRoom, setReserveRoom] =  useState([])
     const hideDateDiv = (start, end) => {
         if(start && end) {
             dispatch(dataUpdate({
@@ -42,11 +43,14 @@ const Reservation = () => {
         
        
     }
-    //해당 날짜에 예약이 되어있는 객실번호 불러오기
+    //해당 날짜에 예약이 되어있는 객실번호 불러오기 
+    
     const searchRoom = (start, end) => {
+        //쿼리스트링으로 전달 쿼리문은 ?시작  start키  end키
         axios.get(`${API_URL}/searchRoom?start=${start}&end=${end}`)
         .then(res=>{
             console.log(res.data)
+            setReserveRoom(res.data)
         })
         .catch(e=>{
             console.log(e)
@@ -107,7 +111,7 @@ const Reservation = () => {
 
                 </ul>
             </div>
-            <RoomContainer isreserve={true}/>
+            <RoomContainer isreserve={true} reserveRoom={reserveRoom}/>
         </div>
     );
 };
