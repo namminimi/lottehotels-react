@@ -1,10 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { API_URL } from '../config/apiurl';
+import { dataUpdate } from '../moduls/reserve';
 import './RoomItem.css';
 
 const RoomItem = ({item}) => {
+    const navigate = useNavigate()
     const price = Number(item.r_price).toLocaleString('ko-kR')
+    const dispatch = useDispatch()
+    const onReserve = () =>{
+        dispatch(dataUpdate({
+            name:"rv_room",
+            value: {
+                roomname: item.r_name,
+                roomno:  item.r_no,
+                price: item.r_price
+            }
+        }))
+        navigate("/reservation/register")
+    }
     return (
         <li>
             <div className='roomitem'>
@@ -19,7 +34,7 @@ const RoomItem = ({item}) => {
                     {price}<br/><span>원1박</span></div>
                 <div>
                     <button><Link to={`/roomdetail/${item.r_no}`}>객실 상세보기</Link></button>
-                    <button>예약하기</button>
+                    <button onClick={onReserve}>예약하기</button>
                 </div>
             </div>
         </li>
