@@ -16,10 +16,17 @@ const Header = () => {
         dispatch(setLogout());
     }
     useEffect(()=>{
-        if(username){
-            dispatch(setLogin())
-        }
-    })
+        const loop = setInterval(()=>{
+            const username = getCookie("username")
+            if(username){
+                dispatch(setLogin())   //2분후 쿠키삭제되고
+            } else{
+                dispatch(setLogout())  // 3초뒤 자동 로그아웃
+                clearInterval(loop);
+            }
+        }, 3000)
+        
+    },[username, dispatch])
     return (
         <header>
             <h1><Link to="/"><img src="/images/logo2.png" alt=""></img></Link></h1>
